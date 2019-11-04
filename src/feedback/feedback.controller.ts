@@ -21,7 +21,7 @@ export class FeedbackController {
   }
 
   @Get()
-  getFeedback(@Query() filterFeedback: FilterFeedbackDto): Feedback[] {
+  getFeedback(@Query(ValidationPipe) filterFeedback: FilterFeedbackDto): Feedback[] {
     if (Object.keys(filterFeedback).length) {
       return this.feedbackService.getFeedbackWithFilters(filterFeedback)
     } else {
