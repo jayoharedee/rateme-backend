@@ -3,6 +3,7 @@ import { FeedbackService } from './feedback.service';
 import { CreateFeedbackDto } from './dto/create-feedback.dto';
 import { Feedback, FeedbackStatus } from './feedback.model';
 import { FilterFeedbackDto } from './dto/filter-feedback.dto';
+import { FeedbackStatusValidation } from './pipes/feedback-status-validation.pipe';
 
 @Controller('feedback')
 export class FeedbackController {
@@ -36,7 +37,7 @@ export class FeedbackController {
   @Patch('/:id/status')
   updateFeedbackStatus(
     @Param('id') id: string,
-    @Body('status') status: FeedbackStatus
+    @Body('status', FeedbackStatusValidation) status: FeedbackStatus
   ): Feedback {
     return this.feedbackService.updateFeedbackStatus(id, status)
   }
