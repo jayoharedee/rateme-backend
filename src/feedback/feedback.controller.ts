@@ -14,7 +14,11 @@ export class FeedbackController {
   }
 
   @Get()
-  getFeedback(@Query() filterfeedback: FilterFeedbackDto): Feedback[] {
-    return this.feedbackService.getAllFeedback()
+  getFeedback(@Query() filterFeedback: FilterFeedbackDto): Feedback[] {
+    if (Object.keys(filterFeedback).length) {
+      return this.feedbackService.getFeedbackWithFilters(filterFeedback)
+    } else {
+      return this.feedbackService.getAllFeedback()
+    }
   }
 }

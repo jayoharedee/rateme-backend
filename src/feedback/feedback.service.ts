@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { Feedback, FeedbackStatus } from './feedback.model';
 import { CreateFeedbackDto } from './dto/create-feedback.dto';
 import * as uuid from 'uuid/v1'
+import { FilterFeedbackDto } from './dto/filter-feedback.dto';
 
 @Injectable()
 export class FeedbackService {
@@ -24,5 +25,23 @@ export class FeedbackService {
 
   getAllFeedback(): Feedback[] {
     return this.feedback
+  }
+
+  getFeedbackWithFilters(filterDto: FilterFeedbackDto): Feedback[] {
+    const { status, search } = filterDto
+    let feedback = this.getAllFeedback()
+
+    if (status) {
+      feedback = feedback.filter((feedback) => feedback.status === status)
+    }
+
+    if (search) {
+      feedback = feedback.filter((feedback) => 
+        feedback.title.includes(search) ||
+        feedback.description.includes(search)
+      )
+    }
+
+    return feedback
   }
 }
