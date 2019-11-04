@@ -24,7 +24,8 @@ export class FeedbackService {
   }
 
   deleteFeedbackById(id: string): void {
-    this.feedback = this.feedback.filter((feedback) => feedback.id !== id)
+    const found = this.getFeedbackById(id)
+    this.feedback = this.feedback.filter((feedback) => feedback.id !== found.id)
   }
 
   getAllFeedback(): Feedback[] {
