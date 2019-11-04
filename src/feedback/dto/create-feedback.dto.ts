@@ -1,4 +1,7 @@
+import { IsNotEmpty } from 'class-validator';
 export class CreateFeedbackDto {
-  description: string;
   title: string;
+
+  @IsNotEmpty()
+  description: string;
 }
