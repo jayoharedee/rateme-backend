@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Body } from '@nestjs/common';
 import { Feedback, FeedbackStatus } from './feedback.model';
 import { CreateFeedbackDto } from './dto/create-feedback.dto';
 import * as uuid from 'uuid/v1'
@@ -23,6 +23,10 @@ export class FeedbackService {
     return feedback
   }
 
+  deleteFeedbackById(id: string): void {
+    this.feedback = this.feedback.filter((feedback) => feedback.id !== id)
+  }
+
   getAllFeedback(): Feedback[] {
     return this.feedback
   }
@@ -42,6 +46,16 @@ export class FeedbackService {
       )
     }
 
+    return feedback
+  }
+
+  getFeedbackById(id: string): Feedback {
+    return this.feedback.find((feedback) => feedback.id === id)
+  }
+
+  updateFeedbackStatus(@Body('id') id: string, status: FeedbackStatus): Feedback {
+    const feedback = this.getFeedbackById(id)
+    feedback.status = status
     return feedback
   }
 }
