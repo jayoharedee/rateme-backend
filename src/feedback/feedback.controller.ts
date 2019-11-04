@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Get, Query, Param, Delete, Patch } from '@nestjs/common';
+import { Controller, Post, Body, Get, Query, Param, Delete, Patch, UsePipes, ValidationPipe } from '@nestjs/common';
 import { FeedbackService } from './feedback.service';
 import { CreateFeedbackDto } from './dto/create-feedback.dto';
 import { Feedback, FeedbackStatus } from './feedback.model';
@@ -9,6 +9,7 @@ export class FeedbackController {
   constructor(private feedbackService: FeedbackService) {}
 
   @Post()
+  @UsePipes(ValidationPipe)
   createFeedback(@Body() createFeedbackDto: CreateFeedbackDto): Feedback {
     return this.feedbackService.createFeedback(createFeedbackDto)
   }

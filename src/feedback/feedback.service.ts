@@ -1,4 +1,4 @@
-import { Injectable, Body } from '@nestjs/common';
+import { Injectable, Body, Patch, NotFoundException } from '@nestjs/common';
 import { Feedback, FeedbackStatus } from './feedback.model';
 import { CreateFeedbackDto } from './dto/create-feedback.dto';
 import * as uuid from 'uuid/v1'
@@ -50,7 +50,15 @@ export class FeedbackService {
   }
 
   getFeedbackById(id: string): Feedback {
-    return this.feedback.find((feedback) => feedback.id === id)
+    const found = this.feedback.find((feedback) => feedback.id === id)
+
+    if (!found) {
+      throw new NotFoundException(
+        `Feedback with "${id}" not found.`
+      )
+    }
+
+    return found
   }
 
   updateFeedbackStatus(@Body('id') id: string, status: FeedbackStatus): Feedback {
