@@ -6,6 +6,11 @@ import { typeOrmConfig } from './config/typeorm.config';
 // import { ConfigService } from './config/config.service';
 
 @Module({
-  imports: [TypeOrmModule.forRoot(typeOrmConfig), FeedbackModule],
+  imports: [
+    TypeOrmModule.forRootAsync({
+      useFactory: () => typeOrmConfig
+    }),
+    FeedbackModule
+  ],
 })
 export class AppModule {}
