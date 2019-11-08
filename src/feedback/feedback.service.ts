@@ -4,6 +4,8 @@ import { FilterFeedbackDto } from './dto/filter-feedback.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { FeedbackRepository } from './feedback.repository';
 import { Feedback } from './feedback.entity';
+import { FeedbackStatus } from './feedback-status.enum';
+import { tsAnyKeyword } from '@babel/types';
 
 @Injectable()
 export class FeedbackService {
@@ -13,20 +15,19 @@ export class FeedbackService {
   ) {}
   // private feedback: Feedback[] = []
 
-  // createFeedback(createFeedbackDto: CreateFeedbackDto): Feedback {
-  //   const { title, description } = createFeedbackDto
 
-  //   const feedback: Feedback = {
-  //     id: uuid(),
-  //     title,
-  //     description,
-  //     status: FeedbackStatus.OPEN,
-  //   }
+  async createFeedback(createFeedbackDto: CreateFeedbackDto): Promise<Feedback> {
+    const { title, description } = createFeedbackDto
 
-  //   this.feedback.push(feedback)
+    const feedback = new Feedback()
+    feedback.title = title
+    feedback.description = description
+    feedback.status = FeedbackStatus.OPEN
 
-  //   return feedback
-  // }
+    await feedback.save()
+
+    return feedback
+  }
 
   // deleteFeedbackById(id: string): void {
   //   const found = this.getFeedbackById(id)
