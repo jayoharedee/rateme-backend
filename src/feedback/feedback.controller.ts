@@ -1,6 +1,6 @@
 import { Controller, Post, Body, Get, Query, Param, Delete, Patch, UsePipes, ValidationPipe, ParseIntPipe } from '@nestjs/common';
 import { FeedbackService } from './feedback.service';
-// import { CreateFeedbackDto } from './dto/create-feedback.dto';
+import { CreateFeedbackDto } from './dto/create-feedback.dto';
 // import { FeedbackStatus } from './feedback-status.enum';
 // import { FilterFeedbackDto } from './dto/filter-feedback.dto';
 // import { FeedbackStatusValidation } from './pipes/feedback-status-validation.pipe';
@@ -10,11 +10,11 @@ import { Feedback } from './feedback.entity';
 export class FeedbackController {
   constructor(private feedbackService: FeedbackService) {}
 
-  // @Post()
-  // @UsePipes(ValidationPipe)
-  // createFeedback(@Body() createFeedbackDto: CreateFeedbackDto): Feedback {
-  //   return this.feedbackService.createFeedback(createFeedbackDto)
-  // }
+  @Post()
+  @UsePipes(ValidationPipe)
+  createFeedback(@Body() createFeedbackDto: CreateFeedbackDto): Promise<Feedback> {
+    return this.feedbackService.createFeedback(createFeedbackDto)
+  }
 
   // @Delete('/:id')
   // deleteTaskById(@Param('id') id: string) {
