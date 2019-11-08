@@ -1,5 +1,5 @@
-import { FeedbackStatus } from "../feedback.model";
-import { IsOptional, IsNotEmpty, IsIn } from "class-validator";
+import { FeedbackStatus } from '../feedback-status.enum';
+import { IsOptional, IsNotEmpty, IsIn } from 'class-validator';
 
 export class FilterFeedbackDto {
   @IsOptional()

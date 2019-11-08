@@ -5,8 +5,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { FeedbackRepository } from './feedback.repository';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([FeedbackRepository])],
+  imports: [
+    TypeOrmModule.forFeature([FeedbackRepository])
+  ],
   controllers: [FeedbackController],
-  providers: [FeedbackService]
+  providers: [FeedbackService],
 })
 export class FeedbackModule {}

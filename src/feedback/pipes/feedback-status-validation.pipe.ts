@@ -1,5 +1,5 @@
-import { PipeTransform, BadRequestException } from "@nestjs/common";
-import { FeedbackStatus } from "../feedback.model";
+import { PipeTransform, BadRequestException } from '@nestjs/common';
+import { FeedbackStatus } from '../feedback-status.enum';
 
 export class FeedbackStatusValidation implements PipeTransform {
   readonly allowedStatuses = [
@@ -13,7 +13,7 @@ export class FeedbackStatusValidation implements PipeTransform {
 
     if (!this.isStatusValid(value)) {
       throw new BadRequestException(
-        `"${value}" is an invalid status`
+        `"${value}" is an invalid status`,
       )
     }
 
