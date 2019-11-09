@@ -5,6 +5,8 @@ import { CreateFeedbackDto } from './dto/create-feedback.dto';
 // import { FilterFeedbackDto } from './dto/filter-feedback.dto';
 // import { FeedbackStatusValidation } from './pipes/feedback-status-validation.pipe';
 import { Feedback } from './feedback.entity';
+import { FeedbackStatusValidation } from './pipes/feedback-status-validation.pipe';
+import { FeedbackStatus } from './feedback-status.enum';
 
 @Controller('feedback')
 export class FeedbackController {
@@ -16,10 +18,10 @@ export class FeedbackController {
     return this.feedbackService.createFeedback(createFeedbackDto)
   }
 
-  // @Delete('/:id')
-  // deleteTaskById(@Param('id') id: string) {
-  //   this.feedbackService.deleteFeedbackById(id)
-  // }
+  @Delete('/:id')
+  deleteTaskById(@Param('id', ParseIntPipe) id: number): Promise<void> {
+    return this.feedbackService.deleteFeedbackById(id)
+  }
 
   // @Get()
   // getFeedback(@Query(ValidationPipe) filterFeedback: FilterFeedbackDto): Feedback[] {
@@ -35,11 +37,11 @@ export class FeedbackController {
     return this.feedbackService.getFeedbackById(id)
   }
 
-  // @Patch('/:id/status')
-  // updateFeedbackStatus(
-  //   @Param('id') id: string,
-  //   @Body('status', FeedbackStatusValidation) status: FeedbackStatus
-  // ): Feedback {
-  //   return this.feedbackService.updateFeedbackStatus(id, status)
-  // }
+  @Patch('/:id/status')
+  updateFeedbackStatus(
+    @Param('id', ParseIntPipe) id: number,
+    @Body('status', FeedbackStatusValidation) status: FeedbackStatus
+  ): Promise<Feedback> {
+    return this.feedbackService.updateFeedbackStatus(id, status)
+  }
 }

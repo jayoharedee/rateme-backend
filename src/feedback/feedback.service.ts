@@ -16,22 +16,17 @@ export class FeedbackService {
 
 
   async createFeedback(createFeedbackDto: CreateFeedbackDto): Promise<Feedback> {
-    const { title, description } = createFeedbackDto
-
-    const feedback = new Feedback()
-    feedback.title = title
-    feedback.description = description
-    feedback.status = FeedbackStatus.OPEN
-
-    await feedback.save()
-
-    return feedback
+    return this.feedbackRepository.createFeedback(createFeedbackDto);
   }
 
-  // deleteFeedbackById(id: string): void {
-  //   const found = this.getFeedbackById(id)
-  //   this.feedback = this.feedback.filter((feedback) => feedback.id !== found.id)
-  // }
+  async deleteFeedbackById(id: number): Promise<void> {
+    const result = await this.feedbackRepository.delete(id)
+    if (result.affected === 0) {
+      throw new NotFoundException(
+        `Feedback with "${id}" not found.`,
+      )
+    }
+  }
 
   // getAllFeedback(): Feedback[] {
   //   return this.feedback
@@ -78,6 +73,13 @@ export class FeedbackService {
 
   //   return found
   // }
+
+  async updateFeedbackStatus(id: number, status: FeedbackStatus): Promise<Feedback> {
+    const feedback = await this.getFeedbackById(id)
+    feedback.status = status
+    await feedback.save()
+    return feedback
+  }
 
   // updateFeedbackStatus(@Body('id') id: string, status: FeedbackStatus): Feedback {
   //   const feedback = this.getFeedbackById(id)
