@@ -5,6 +5,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { FeedbackRepository } from './feedback.repository';
 import { Feedback } from './feedback.entity';
 import { FeedbackStatus } from './feedback-status.enum';
+import { FilterFeedbackDto } from './dto/filter-feedback.dto';
 
 @Injectable()
 export class FeedbackService {
@@ -12,7 +13,6 @@ export class FeedbackService {
     @InjectRepository(FeedbackRepository)
     private feedbackRepository: FeedbackRepository,
   ) {}
-  // private feedback: Feedback[] = []
 
 
   async createFeedback(createFeedbackDto: CreateFeedbackDto): Promise<Feedback> {
@@ -28,27 +28,10 @@ export class FeedbackService {
     }
   }
 
-  // getAllFeedback(): Feedback[] {
-  //   return this.feedback
-  // }
+  async getAllFeedback(filterDto: FilterFeedbackDto): Promise<Feedback[]> {
+    return this.feedbackRepository.getTasks(filterDto)
+  }
 
-  // getFeedbackWithFilters(filterDto: FilterFeedbackDto): Feedback[] {
-  //   const { status, search } = filterDto
-  //   let feedback = this.getAllFeedback()
-
-  //   if (status) {
-  //     feedback = feedback.filter((feedback) => feedback.status === status)
-  //   }
-
-  //   if (search) {
-  //     feedback = feedback.filter((feedback) =>
-  //       feedback.title.includes(search) ||
-  //       feedback.description.includes(search)
-  //     )
-  //   }
-
-  //   return feedback
-  // }
 
   async getFeedbackById(id: number): Promise<Feedback> {
     const found = await this.feedbackRepository.findOne(id)
@@ -60,19 +43,8 @@ export class FeedbackService {
     }
 
     return found
-
   }
-  // getFeedbackById(id: string): Feedback {
-  //   const found = this.feedback.find((feedback) => feedback.id === id)
 
-  //   if (!found) {
-  //     throw new NotFoundException(
-  //       `Feedback with "${id}" not found.`
-  //     )
-  //   }
-
-  //   return found
-  // }
 
   async updateFeedbackStatus(id: number, status: FeedbackStatus): Promise<Feedback> {
     const feedback = await this.getFeedbackById(id)
@@ -80,10 +52,4 @@ export class FeedbackService {
     await feedback.save()
     return feedback
   }
-
-  // updateFeedbackStatus(@Body('id') id: string, status: FeedbackStatus): Feedback {
-  //   const feedback = this.getFeedbackById(id)
-  //   feedback.status = status
-  //   return feedback
-  // }
 }

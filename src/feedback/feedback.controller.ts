@@ -7,6 +7,7 @@ import { CreateFeedbackDto } from './dto/create-feedback.dto';
 import { Feedback } from './feedback.entity';
 import { FeedbackStatusValidation } from './pipes/feedback-status-validation.pipe';
 import { FeedbackStatus } from './feedback-status.enum';
+import { FilterFeedbackDto } from './dto/filter-feedback.dto';
 
 @Controller('feedback')
 export class FeedbackController {
@@ -23,14 +24,10 @@ export class FeedbackController {
     return this.feedbackService.deleteFeedbackById(id)
   }
 
-  // @Get()
-  // getFeedback(@Query(ValidationPipe) filterFeedback: FilterFeedbackDto): Feedback[] {
-  //   if (Object.keys(filterFeedback).length) {
-  //     return this.feedbackService.getFeedbackWithFilters(filterFeedback)
-  //   } else {
-  //     return this.feedbackService.getAllFeedback()
-  //   }
-  // }
+  @Get()
+  getFeedback(@Query(ValidationPipe) filterDto: FilterFeedbackDto) {
+    return this.feedbackService.getAllFeedback(filterDto)
+  }
 
   @Get('/:id')
   getFeedbackById(@Param('id', ParseIntPipe) id: number): Promise<Feedback> {
