@@ -1,3 +1,10 @@
+# GBC DevOps Docker Exercise
+
+> Check the Dockerfile in the projects root and try and take a guess at what we're doing with this application
+
+> Information on the Node framework used for this project can be found below.
+
+
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
 </p>
