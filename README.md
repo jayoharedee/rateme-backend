@@ -8,6 +8,15 @@ sudo yum update -y
 
 #Install git in your EC2 instance
 sudo yum install git -y
+
+#Install Docker
+sudo yum install -y docker
+
+#Add the ec2-user to the docker group for elevated permissions
+sudo usermod -aG docker ec2-user
+
+#Start the docker service
+sudo service docker start
 ```
 
 #### Instructions
