@@ -6,7 +6,9 @@
 
 #### Instructions
 
-To create an image from the Dockerfile found in [this project](https://github.com/jayoharedee/rateme-backend), run the following command in your terminal inside of the cloned directory of the project repo. **Make sure you checkout the example/dockerfile branch before continuing.**
+To create an image from the Dockerfile found in [this project](https://github.com/jayoharedee/rateme-backend), first start by cloning [this project](https://github.com/jayoharedee/rateme-backend) on your EC2. **Make sure you checkout the branch `example/dockerfile` before continuing.**
+
+Once you're on the example/dockerfile branch, we're going to run a series of commands in the root of the clone repository.
 
 ```sh
 $ docker image ls
