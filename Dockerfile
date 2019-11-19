@@ -3,14 +3,13 @@ FROM node:10
 # Create working directory
 WORKDIR /usr/src/app
 
-COPY package*.json ./
+COPY *.json ./
+
 # RUN 
-RUN npm install
-RUN npm run build
+RUN npm install && npm run build
+RUN ls -la
 
 # Bundle app source
-
-COPY dist/ ./
 COPY . .
 
 EXPOSE 3000
