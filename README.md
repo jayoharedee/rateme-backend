@@ -21,15 +21,15 @@ sudo service docker start
 
 #### Instructions
 
-To create an image from the Dockerfile found in [this project](https://github.com/jayoharedee/rateme-backend), first start by cloning [this project](https://github.com/jayoharedee/rateme-backend) on your EC2. **Make sure you checkout the branch `example/dockerfile` before continuing.**
+To create an image from the Dockerfile found in [our example project](https://github.com/jayoharedee/rateme-backend), first start by cloning [the project](https://github.com/jayoharedee/rateme-backend) on your EC2. **Make sure you checkout the branch `example/dockerfile` before continuing.**
 
 Once you're on the example/dockerfile branch, we're going to run a series of commands in the root of the clone repository.
 
 ```sh
-$ docker image ls
+$ sudo docker image ls
 # Output should be:
 # CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
-$ docker build -t gbc-devops .
+$ sudo docker build -t gbc-devops .
 ```
 
 After building a docker container we should see an output that looks something like the image thats found below. My output might look a little different than yours as I've build this container before and Docker leveraged a caching layer containing artifacts that helped produce a faster build. This is one advantage of Docker, you'll only see a reduced performance tax for a lot of the work that needs to be completed by the engine.
@@ -51,7 +51,7 @@ We're going to be using the docker run command to reference the gbc-devops image
 ![Docker build log](./assets/dockerun.png "Docker build log")
 
 ```sh
-$ docker run --rm  -d -p 3003:3000 a877334c3da6
+$ sudo docker run --rm  -d -p 3003:3000 a877334c3da6
 ```
 
 Let's dissect the above command a bit. After the run argument, we notice some flags and switches. Let's see what each one of these additional parameters do:
