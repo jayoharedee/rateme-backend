@@ -1,7 +1,5 @@
 # GBC DevOps Docker Exercise
 
-> Check the Dockerfile in the projects root and try and take a guess at what we're doing with this application
-
 *You'll be launching a new instance for this challenge so ensure you update your server and install git. Commands can be found below for reference.*
 
 ```sh
