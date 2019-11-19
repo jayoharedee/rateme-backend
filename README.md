@@ -1,19 +1,38 @@
 # GBC DevOps Docker Exercise
 
-> Check the Dockerfile in the projects root and try and take a guess at what we're doing with this application
+*You'll be launching a new instance for this challenge so ensure you update your server and install git. Commands can be found below for reference.*
 
-> Information on the Node framework used for this project can be found below.
+```sh
+#Perform a quick update on your instance:
+sudo yum update -y
+
+#Install git in your EC2 instance
+sudo yum install git -y
+
+#Install Docker
+sudo yum install -y docker
+
+#Add the ec2-user to the docker group for elevated permissions
+sudo usermod -aG docker ec2-user
+
+#Start the docker service
+sudo service docker start
+```
 
 #### Instructions
 
-To create an image from the Dockerfile found in [this project](https://github.com/jayoharedee/rateme-backend), run the following command in your terminal inside of the cloned directory of the project repo. **Make sure you checkout the example/dockerfile branch before continuing.**
+To create an image from the Dockerfile found in [our example project](https://github.com/jayoharedee/rateme-backend), first start by cloning [the project](https://github.com/jayoharedee/rateme-backend) on your EC2. **Make sure you checkout the branch `example/dockerfile` before continuing.**
+
+Once you're on the example/dockerfile branch, we're going to run a series of commands in the root of the clone repository.
 
 ```sh
-$ docker image ls
+$ sudo docker image ls
 # Output should be:
 # CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
-$ docker build -t gbc-devops .
+$ sudo docker build -t gbc-devops .
 ```
+
+**For security reasons, we need to run commands with elevated privileges on our EC2. When running commands with elevated permissions we use the `sudo` command. The screengrabs below were completed on macOS and my configuration is much different than default EC2 settings. Due to this, make sure you use sudo when running docker commands on your EC2**
 
 After building a docker container we should see an output that looks something like the image thats found below. My output might look a little different than yours as I've build this container before and Docker leveraged a caching layer containing artifacts that helped produce a faster build. This is one advantage of Docker, you'll only see a reduced performance tax for a lot of the work that needs to be completed by the engine.
 
@@ -34,7 +53,7 @@ We're going to be using the docker run command to reference the gbc-devops image
 ![Docker build log](./assets/dockerun.png "Docker build log")
 
 ```sh
-$ docker run --rm  -d -p 3003:3000 a877334c3da6
+$ sudo docker run --rm  -d -p 3003:3000 a877334c3da6
 ```
 
 Let's dissect the above command a bit. After the run argument, we notice some flags and switches. Let's see what each one of these additional parameters do:
