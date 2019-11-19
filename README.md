@@ -2,8 +2,6 @@
 
 > Check the Dockerfile in the projects root and try and take a guess at what we're doing with this application
 
-> Information on the Node framework used for this project can be found below.
-
 #### Instructions
 
 To create an image from the Dockerfile found in [this project](https://github.com/jayoharedee/rateme-backend), first start by cloning [this project](https://github.com/jayoharedee/rateme-backend) on your EC2. **Make sure you checkout the branch `example/dockerfile` before continuing.**
