@@ -32,6 +32,8 @@ $ sudo docker image ls
 $ sudo docker build -t gbc-devops .
 ```
 
+**For security reasons, we need to run commands with elevated privileges on our EC2. When running commands with elevated permissions we use the `sudo` command. The screengrabs below were completed on macOS and my configuration is much different than default EC2 settings. Due to this, make sure you use sudo when running docker commands on your EC2**
+
 After building a docker container we should see an output that looks something like the image thats found below. My output might look a little different than yours as I've build this container before and Docker leveraged a caching layer containing artifacts that helped produce a faster build. This is one advantage of Docker, you'll only see a reduced performance tax for a lot of the work that needs to be completed by the engine.
 
 ![Docker build log](./assets/dockerbuildlog.png "Docker build log")
