@@ -2,6 +2,16 @@
 
 > Check the Dockerfile in the projects root and try and take a guess at what we're doing with this application
 
+*You'll be launching a new instance for this challenge so ensure you update your server and install git. Commands can be found below for reference.*
+
+```sh
+#Perform a quick update on your instance:
+sudo yum update -y
+
+#Install git in your EC2 instance
+sudo yum install git -y
+```
+
 #### Instructions
 
 To create an image from the Dockerfile found in [this project](https://github.com/jayoharedee/rateme-backend), first start by cloning [this project](https://github.com/jayoharedee/rateme-backend) on your EC2. **Make sure you checkout the branch `example/dockerfile` before continuing.**
